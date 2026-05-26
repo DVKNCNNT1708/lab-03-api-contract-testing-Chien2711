@@ -14,7 +14,8 @@ paths:
     get:
       summary: Health check
       operationId: healthCheck
-      tags: [detection]
+      tags:
+        - detection
       responses:
         '200':
           description: OK
@@ -23,12 +24,14 @@ paths:
               schema:
                 type: object
                 properties:
-                  status: { type: string }
+                  status:
+                    type: string
               example:
                 status: "ok"
   /detect:
     post:
-      tags: [detection]
+      tags:
+        - detection
       summary: Detect objects in image
       description: Phân tích hình ảnh và trả về các đối tượng nhận diện được.
       operationId: detectObjects
@@ -38,7 +41,8 @@ paths:
             schema:
               type: object
               properties:
-                image_url: { type: string }
+                image_url:
+                  type: string
       responses:
         '200':
           description: OK
@@ -47,6 +51,9 @@ paths:
               schema:
                 type: object
                 properties:
-                  detection_id: { type: string }
-                  label: { type: string }
-                  confidence: { type: number }
+                  detection_id:
+                    type: string
+                  label:
+                    type: string
+                  confidence:
+                    type: number
