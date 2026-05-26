@@ -17,7 +17,8 @@ tags:
 paths:
   /health:
     get:
-      tags: [health]
+      tags:
+        - health
       summary: Check health
       description: Endpoint to check if the service is alive.
       operationId: getHealth
@@ -30,7 +31,8 @@ paths:
                 $ref: '#/components/schemas/HealthStatus'
   /readings:
     post:
-      tags: [readings]
+      tags:
+        - readings
       summary: Create a reading
       description: Accept sensor reading from IoT devices.
       operationId: createReading
@@ -57,7 +59,8 @@ paths:
           $ref: '#/components/responses/UnprocessableEntity'
   /readings/latest:
     get:
-      tags: [readings]
+      tags:
+        - readings
       summary: List latest readings
       description: Get the most recent readings with limits.
       operationId: getLatestReadings
@@ -101,20 +104,29 @@ components:
     HealthStatus:
       type: object
       properties:
-        status: { type: string }
-        service: { type: string }
+        status:
+          type: string
+        service:
+          type: string
       example:
         status: "ok"
         service: "IoT Ingestion Service"
     ReadingPayload:
       type: object
-      required: [device_id, metric, value]
+      required:
+        - device_id
+        - metric
+        - value
       properties:
         device_id:
           type: string
         metric:
           type: string
-          enum: [temperature, humidity, motion, smoke]
+          enum:
+            - temperature
+            - humidity
+            - motion
+            - smoke
         value:
           type: number
       example:
@@ -124,19 +136,29 @@ components:
     ReadingResponse:
       type: object
       properties:
-        reading_id: { type: string, format: uuid }
-        status: { type: string }
-        accepted: { type: boolean }
-        device_id: { type: string }
-        metric: { type: string }
+        reading_id:
+          type: string
+          format: uuid
+        status:
+          type: string
+        accepted:
+          type: boolean
+        device_id:
+          type: string
+        metric:
+          type: string
       example:
         reading_id: "123e4567-e89b-12d3-a456-426614174000"
         status: "accepted"
         accepted: true
         device_id: "ESP32-LAB-A01"
+        metric: "temperature"
     ProblemDetails:
       type: object
-      required: [type, title, status]
+      required:
+        - type
+        - title
+        - status
       properties:
         type:
           type: string
